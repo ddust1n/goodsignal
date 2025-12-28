@@ -106,6 +106,7 @@ export type Signal<T...> = {
 	Once: (self: Signal<T...>, callback: (T...) -> ()) -> Connection,
 	Fire: (self: Signal<T...>, T...) -> (),
 	Wait: (self: Signal<T...>) -> T...,
+	DisconnectAll: (self: Signal<T...>) -> (),
 }
 
 -- Signal class
@@ -161,6 +162,11 @@ function Signal:Wait()
 	local cn
 	cn = self:Connect(function(...)
 		cn:Disconnect()
+		
+		if coroutine.status(waitingCoroutine) ~= "suspended" then
+			return
+		end
+
 		task.spawn(waitingCoroutine, ...)
 	end)
 	return coroutine.yield()
