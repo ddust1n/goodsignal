@@ -7,5 +7,7 @@ authors = ["Mark Langen <stravant@gmail.com>"]
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 
+exclude = ["**"]
+include = ["src", "src/**", "default.project.json", "LICENSE", "wally.toml"]
+
 [dependencies]
-# None :)

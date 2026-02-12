@@ -162,7 +162,7 @@ function Signal:Wait()
 	local cn
 	cn = self:Connect(function(...)
 		cn:Disconnect()
-		
+
 		if coroutine.status(waitingCoroutine) ~= "suspended" then
 			return
 		end
